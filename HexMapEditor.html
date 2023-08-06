@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <script src='./js/ActorConfig.js'></script>
+    <script src='./js/HexMapEditor.js'></script>
+</head>
+
+<body>
+    <div id='Maps'>
+        <canvas id='canvas' width='1280px' height='720px'></canvas>
+    </div>
+    <div id='Spaces'></div>
+    <div id='Workspaces'>
+        <div id='BaseInfos'>
+            <p>图层信息</p>
+            <div id='BaseInfos-List'>
+                <li>六边形（宽）：<input onchange='OnHexWidthChange(this)' id='HexWidth' value='15' type='number' /></li>
+                <li>六边形（高）：<input onchange='OnHexHeightChange(this)' id='HexHeight' value='15' type='number' /></li>
+                <li>六边形（IR）：<input onchange='OnHexSizeChange(this)' id='HexSize' value='50' type='number' /></li>
+            </div>
+        </div>
+        <div id='Layers'>
+            <p>图层列表&nbsp&nbsp<input type='button' value='创建图层' onclick='AddLayerClick(this)'></p>
+            <div id='Layers-List'>
+            </div>
+        </div>
+        <div id='AttributeSet'>
+            <p>属性列表&nbsp&nbsp<input type='button' value='添加属性' onclick='AddAttributeSetClick(this)'></p>
+            <div id='AttributeSet-List'>
+            </div>
+        </div>
+        <div id='Coordinates'>
+            <p>坐标列表&nbsp&nbsp<input type='button' value='添加坐标' onclick='AddCoordinatesClick(this)'></p>
+            <div id='Coordinates-List'>
+            </div>
+        </div>
+        <div id='Modifies'>
+            <p>修改列表&nbsp&nbsp<input type='button' value='添加修改' onclick='AddModifiesClick(this)'></p>
+            <div id='Modifies-List'>
+            </div>
+        </div>
+        <div id='Modifies-Flags'>
+            <p>Flags列表&nbsp&nbsp<input type='button' value='添加标志' onclick='AddModifiesFlagsClick(this)'></p>
+            <div id='Modifies-Flags-List'>
+            </div>
+        </div>
+        <div id='Modifies-Actors'>
+            <p>Actors列表&nbsp&nbsp<input type='button' value='添加Actor' onclick='AddModifiesActorsClick(this)'></p>
+            <div id='Modifies-Actors-List'>
+            </div>
+        </div>
+        <div id='Config'>
+            <li style='display: none;'><a id='DownloadConfig'></a></li>
+            <li><input type='file' value='导入配置' onchange='ImportConfigChange(this)' /></li>
+            <li><input type='button' onclick='ExportConfigClick(this)' value='导出配置' /></li>
+            <li><input type='button' onclick='ClearData(this)' value='清除数据' /></li>
+        </div>
+    </div>
+</body>
+
+</html>
+<html>
+
+<head>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #Maps {
+            overflow: scroll;
+            position: absolute;
+            width: 100%;
+            height: 70%;
+        }
+
+        #Maps #Background {
+            position: absolute;
+            top: -500px;
+            left: -1000px;
+        }
+
+        #Maps #Canvas {
+            position: absolute;
+        }
+
+        #Spaces {
+            float: left;
+            width: 100%;
+            height: 70%;
+        }
+
+        #Workspaces {
+            overflow: scroll;
+            float: left;
+            width: 100%;
+            height: 30%;
+        }
+
+        #Workspaces #BaseInfos,
+        #Workspaces #Layers,
+        #Workspaces #AttributeSet,
+        #Workspaces #Coordinates,
+        #Workspaces #Modifies,
+        #Workspaces #Modifies-Flags,
+        #Workspaces #Modifies-Actors,
+        #Workspaces #Config {
+            float: left;
+            margin: 12px;
+            height: 90%;
+            overflow: auto;
+        }
+
+        #Workspaces li {
+            margin: 0;
+            list-style: none;
+            background-color: #eeeeee;
+        }
+
+        #Workspaces ul {
+            margin: 0;
+        }
+
+        #Workspaces li.Selected,
+        #Workspaces li.Selected li,
+        #Workspaces li.Selected ul {
+            background-color: aqua;
+        }
+
+        #Workspaces #Layers #Layers-List input.LayerName {
+            border-style: none;
+            border: 0;
+            background: none;
+        }
+
+        #Workspaces .line-through {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+</html>
