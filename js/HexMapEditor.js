@@ -359,8 +359,10 @@ function DrawHexes() {
                 let Flag = value
                 let Num = 0
 
-                CTX.fillStyle = 'rgba(0, 0, 0, 0.75)'
-                CTX.fillRect(FlagX + 2, FlagY + FlagsNum * Size, Hex.IR * 2 - 4, Size)
+                if ((Flag.Flags & (EHexFlag.NoInfantry | EHexFlag.NoVehicle | EHexFlag.NoAircraft)) != 0) {
+                    CTX.fillStyle = 'rgba(0, 0, 0, 0.75)'
+                    CTX.fillRect(FlagX + 2, FlagY + FlagsNum * Size, Hex.IR * 2 - 4, Size)
+                }
 
                 if ((Flag.Flags & EHexFlag.NoInfantry) != 0) {
                     CTX.drawImage(Images.get('NoInfantry'), FlagX + Num * Size, FlagY + FlagsNum * Size, Size, Size)
