@@ -277,10 +277,11 @@ function DrawHexes() {
             }
 
             for (let j = 0; j < Attribute.Coordinates.length; j++) {
-                let Key = MakeCoordinateKey(Attribute.Coordinates[j])
+                let Coordinate = Attribute.Coordinates[j]
+                let Key = MakeCoordinateKey(Coordinate)
                 let Hex = HexGenerator.Hexes.get(Key)
                 if (!Hex) {
-                    alert('坐标点错误：' + Key)
+                    alert('坐标点错误：' + i + ' | ' + j + ' ' + '[' + Coordinate.X + ',' + Coordinate.Y + ',' + Coordinate.Z + ']')
                     continue
                 }
 
@@ -631,10 +632,10 @@ function UpdateCoordinatesList() {
 
     let CoordinatesListElement = document.getElementById('Coordinates-List')
     let Coordinates = GetCurrentCoordinates()
-    for (let j = 0; Coordinates && j < Coordinates.length; j++) {
-        let Coordinate = Coordinates[j]
+    for (let i = 0; Coordinates && i < Coordinates.length; i++) {
+        let Coordinate = Coordinates[i]
         Content += '<li>\
-            <input type=\'button\' value=\'X\' onclick=\'DeleteCoordinatesClick(this)\' />\
+            <input type=\'button\' value=\'X\' onclick=\'DeleteCoordinatesClick(this)\' />[' + i + ']\
             <input value=\'[' + Coordinate.X + ', ' + Coordinate.Y + ', ' + Coordinate.Z + ']\' type=\'text\' onchange=\'OnCoordinatesChange(this)\' />\
         </li>'
     }
