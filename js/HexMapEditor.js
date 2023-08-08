@@ -1,4 +1,4 @@
-var Canvas = null
+﻿var Canvas = null
 var CTX = null
 var HexGenerator = null
 var bInitialize = false
@@ -332,17 +332,12 @@ function DrawHexes() {
                 CTX.fillText('(' + Coordinate.X + ',' + Coordinate.Y + ',' + Coordinate.Z + ')', Position.X - Scale * 20, Position.Y + Math.ceil(5 * Scale))
             }
 
-            // if (Hex.Flags.size > 0 || Hex.Actors.size > 0) {
-            //     CTX.fillStyle = 'rgba(0, 0, 0, 0.5)'
-            //     DrawHex(Position.X, Position.Y, OR)
-            // }
-
             // 绘制Actors
             let ActorX = Position.X - Hex.IR
             let ActorY = Position.Y - Hex.IR
             for (let [key, value] of Hex.Actors) {
                 let Actor = value
-                let ActorInfo = GetActorInfo(Actor.Class)
+                let ActorInfo = GetActorInfo(Actor.ActorClass)
                 if (ActorInfo) {
                     CTX.drawImage(Images.get(ActorInfo.Name), ActorX, ActorY, Hex.IR * 2, Hex.IR * 2)
                 }
@@ -389,22 +384,24 @@ function DrawHexes() {
 
         // 绘制选择框
         let Coordinates = GetCurrentCoordinates()
-        for (let i = 0; i < Coordinates.length; i++) {
-            let Key = MakeCoordinateKey(Coordinates[i])
-            let Hex = HexGenerator.Hexes.get(Key)
-            let Position = Hex.Position
-            let X = Position.X
-            let Y = Position.Y
-            let OR = Hex.OR
-            CTX.strokeStyle = 'rgba(255, 0, 0, 1)'
-            CTX.beginPath()
-            for (let i = 1; i <= 6; i++) {
-                CTX.lineTo(X + OR * Math.sin(2 * Math.PI * i / 6), Y + OR * Math.cos(2 * Math.PI * i / 6));
+        if (Coordinates) {
+            for (let i = 0; i < Coordinates.length; i++) {
+                let Key = MakeCoordinateKey(Coordinates[i])
+                let Hex = HexGenerator.Hexes.get(Key)
+                let Position = Hex.Position
+                let X = Position.X
+                let Y = Position.Y
+                let OR = Hex.OR
+                CTX.strokeStyle = 'rgba(255, 0, 0, 1)'
+                CTX.beginPath()
+                for (let i = 1; i <= 6; i++) {
+                    CTX.lineTo(X + OR * Math.sin(2 * Math.PI * i / 6), Y + OR * Math.cos(2 * Math.PI * i / 6));
+                }
+                CTX.closePath()
+                CTX.lineWidth = 2
+                CTX.lineJoin = 'round'
+                CTX.stroke()
             }
-            CTX.closePath()
-            CTX.lineWidth = 2
-            CTX.lineJoin = 'round'
-            CTX.stroke()
         }
     }
 }
@@ -520,7 +517,7 @@ window.onload = async function () {
         let ActorInfo = ActorConfig[i]
         await ImageLoader(ActorInfo.Name, ActorInfo.Icon)
 
-        ClassContent += '<option value=\'' + ActorInfo.Class + '\'>' + ActorInfo.Name + '</option>'
+        ClassContent += '<option value=\'' + ActorInfo.ActorClass + '\'>' + ActorInfo.Name + '</option>'
     }
     ClassContent += '/<select>'
 
@@ -744,7 +741,7 @@ function UpdateModifiesActorsList() {
         let Rotation = SpawnTransform.Rotation
         let Scale3D = SpawnTransform.Scale3D
 
-        let NewClassContent = ClassContent.replace('value=\'' + Actor.Class + '\'', 'value=\'' + Actor.Class + '\' selected=\'selected\'')
+        let NewClassContent = ClassContent.replace('value=\'' + Actor.ActorClass + '\'', 'value=\'' + Actor.ActorClass + '\' selected=\'selected\'')
         if (i == CurrentModifiesActorsIndex) {
             Content += '<li class=\'Selected\' onclick=\'OnModifiesActorsListClick(this)\'>\
                 <input type=\'button\' value=\'X\' onclick=\'DeleteModifiesActorsClick(this)\' />[' + i + ']\
@@ -1303,7 +1300,7 @@ function OnActorWeightChange(e) {
 function OnClassSelect(e) {
     let Actor = GetCurrentActor()
     if (Actor) {
-        Actor.Class = e.value
+        Actor.ActorClass = e.value
 
         SaveMapData()
 
