@@ -280,6 +280,7 @@ function DrawHexes() {
                 let Key = MakeCoordinateKey(Attribute.Coordinates[j])
                 let Hex = HexGenerator.Hexes.get(Key)
                 if (!Hex) {
+                    alert('坐标点错误：' + Key)
                     continue
                 }
 
@@ -388,6 +389,9 @@ function DrawHexes() {
             for (let i = 0; i < Coordinates.length; i++) {
                 let Key = MakeCoordinateKey(Coordinates[i])
                 let Hex = HexGenerator.Hexes.get(Key)
+                if (!Hex) {
+                    continue
+                }
                 let Position = Hex.Position
                 let X = Position.X
                 let Y = Position.Y
