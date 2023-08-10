@@ -27,13 +27,13 @@
         Icon: './images/T_Military_1V2_02_01.png',
         ActorClass: "/Game/Airship/Core/Gameplay/Military/BP_Military_1V2_02_01.BP_Military_1V2_02_01_C",
         Desc: '基地',
-        Name: '1v2基地Team2左斜'
+        Name: '1v2基地Team2右斜'
     },
 {
         Icon: './images/T_Military_1V2_02_02.png',
         ActorClass: "/Game/Airship/Core/Gameplay/Military/BP_Military_1V2_02_02.BP_Military_1V2_02_02_C",
         Desc: '基地',
-        Name: '1v2基地Team2右斜'
+        Name: '1v2基地Team2左斜'
     },
 {
         Icon: './images/T_Military_1V2_02_03.png',
@@ -102,6 +102,12 @@
         Name: '障碍物6'
     },
 {
+        Icon: './images/T_Comduit.png',
+        ActorClass: "/Game/Airship/Core/Gameplay/Place/BP_Comduit.BP_Comduit_C",
+        Desc: '障碍物',
+        Name: '障碍物7'
+    },
+{
         Icon: './images/T_Population.png',
         ActorClass: "/Game/Airship/Core/Gameplay/Population/BP_Population.BP_Population_C",
         Desc: '人口占领点',
@@ -112,6 +118,18 @@
         ActorClass: "/Game/Airship/Core/Gameplay/Treasure/BP_Treasure.BP_Treasure_C",
         Desc: '资源宝箱',
         Name: '资源宝箱'
+    },
+{
+        Icon: './images/T_Turret_Aries.png',
+        ActorClass: "/Game/Airship/Core/AI/Turret/SpawnPoint/BP_TurretSpawnPoint_Team2_Right.BP_TurretSpawnPoint_Team2_Right_C",
+        Desc: '炮台',
+        Name: 'Team2左炮台'
+    },
+{
+        Icon: './images/T_Turret_Aries.png',
+        ActorClass: "/Game/Airship/Core/AI/Turret/SpawnPoint/BP_TurretSpawnPoint_Team2_Left.BP_TurretSpawnPoint_Team2_Left_C",
+        Desc: '炮台',
+        Name: 'Team2右炮台'
     },
 ]
 
